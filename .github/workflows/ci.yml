@@ -27,21 +27,24 @@ jobs:
       run: |
         cd src
         chmod +x build.sh
+        # Add curl flags for sec_data_acquisition compilation
+        export CPPFLAGS="$(pkg-config --cflags libcurl)"
+        export LDFLAGS="$(pkg-config --libs libcurl)"
         ./build.sh
     
     - name: Run unit tests
       run: |
         cd tests/unit
-        # Compile and run document parser test
-        g++ -std=c++17 test_document_parser.cpp -o test_document_parser
+        # Compile and run document parser test with include path
+        g++ -std=c++17 -I.. test_document_parser.cpp -o test_document_parser
         ./test_document_parser
         
         # Compile and run TFIDF embedding test
-        g++ -std=c++17 test_tfidf_embedding.cpp -o test_tfidf_embedding
+        g++ -std=c++17 -I.. test_tfidf_embedding.cpp -o test_tfidf_embedding
         ./test_tfidf_embedding
         
         # Compile and run LLM client test
-        g++ -std=c++17 test_llm_client.cpp -o test_llm_client
+        g++ -std=c++17 -I.. test_llm_client.cpp -o test_llm_client
         ./test_llm_client
     
     - name: Test executables
@@ -87,6 +90,11 @@ jobs:
       shell: msys2 {0}
       run: |
         cd src
+        # Export pkg-config variables for curl
+        export PKG_CONFIG_PATH="/mingw64/lib/pkgconfig"
+        export CPPFLAGS="$(pkg-config --cflags libcurl)"
+        export LDFLAGS="$(pkg-config --libs libcurl)"
+        
         g++ -std=c++17 -O2 -o document_parser.exe document_parser.cpp
         g++ -std=c++17 -O2 -o html_text_extractor.exe html_text_extractor.cpp
         g++ -std=c++17 -O2 -o tfidf_embedding.exe tfidf_embedding.cpp
@@ -94,7 +102,7 @@ jobs:
         g++ -std=c++17 -O2 -o rag_engine.exe rag_engine.cpp
         g++ -std=c++17 -O2 -o financial_analyzer.exe financial_analyzer.cpp
         g++ -std=c++17 -O2 -o main.exe main.cpp
-        g++ -std=c++17 -O2 -I/mingw64/include -L/mingw64/lib -o sec_data_acquisition.exe sec_data_acquisition.cpp sec_edgar_client.cpp -lcurl
+        g++ -std=c++17 -O2 $(pkg-config --cflags libcurl) -o sec_data_acquisition.exe sec_data_acquisition.cpp sec_edgar_client.cpp $(pkg-config --libs libcurl)
     
     - name: Test Windows build
       shell: msys2 {0}
@@ -125,6 +133,9 @@ jobs:
       run: |
         cd src
         chmod +x build.sh
+        # Add curl flags for sec_data_acquisition compilation
+        export CPPFLAGS="$(pkg-config --cflags libcurl)"
+        export LDFLAGS="$(pkg-config --libs libcurl)"
         ./build.sh
     
     - name: Create Release
