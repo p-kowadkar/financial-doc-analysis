@@ -16,7 +16,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential g++ libcurl4-openssl-dev libssl-dev
+        sudo apt-get install -y build-essential g++ libcurl4-openssl-dev libssl-dev pkg-config
 
     - name: Create directories
       run: |
@@ -75,6 +75,7 @@ jobs:
           mingw-w64-x86_64-cmake
           mingw-w64-x86_64-openssl
           make
+          mingw-w64-x86_64-pkg-config
     
     - name: Create directories
       shell: msys2 {0}
@@ -93,7 +94,7 @@ jobs:
         g++ -std=c++17 -O2 -o rag_engine.exe rag_engine.cpp
         g++ -std=c++17 -O2 -o financial_analyzer.exe financial_analyzer.cpp
         g++ -std=c++17 -O2 -o main.exe main.cpp
-        g++ -std=c++17 -O2 -o sec_data_acquisition.exe sec_data_acquisition.cpp sec_edgar_client.cpp
+        g++ -std=c++17 -O2 -I/mingw64/include -L/mingw64/lib -o sec_data_acquisition.exe sec_data_acquisition.cpp sec_edgar_client.cpp -lcurl
     
     - name: Test Windows build
       shell: msys2 {0}
@@ -118,7 +119,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential g++ libcurl4-openssl-dev
+        sudo apt-get install -y build-essential g++ libcurl4-openssl-dev pkg-config
     
     - name: Build release
       run: |
