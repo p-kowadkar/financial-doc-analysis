@@ -1,0 +1,90 @@
+# Build outputs
+*.exe
+*.out
+*.app
+*.dll
+*.so
+*.dylib
+*.o
+*.obj
+*.lib
+*.a
+*.la
+*.lo
+
+# Build directories
+build/
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+
+# IDE and editor files
+.vscode/
+.vs/
+*.swp
+*.swo
+*~
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj.filters
+
+# Dependency directories
+vcpkg/
+packages/
+vendor/
+
+# Generated files
+output/*.json
+output/*.md
+data/sec_filings/
+*.log
+*.cache
+
+# Config files with sensitive data
+config/*_config.conf
+!config/example_config.conf
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Project-specific
+*.pdb
+*.ilk
+*.exp
+*.map
+*.manifest
+*.idb
+*.ipch
+*.tlog
+*.lastbuildstate
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.VC.opendb
+
+# Test outputs
+tests/**/*.exe
+tests/**/*.out
+tests/**/*.log
+
+# Documentation
+docs/_build/
+docs/_static/
+docs/_templates/
+
+# Cache and temporary files
+.cache/
+tmp/
+temp/

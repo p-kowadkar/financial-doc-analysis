@@ -1,0 +1,178 @@
+UNITED STATES
+SECURITIES AND EXCHANGE COMMISSION
+Washington, D.C. 20549
+
+FORM 10-K
+
+ANNUAL REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934
+
+For the fiscal year ended September 30, 2023
+
+Apple Inc.
+(Exact name of Registrant as specified in its charter)
+
+PART I
+
+Item 1. Business
+
+Company Overview
+Apple Inc. designs, manufactures and markets smartphones, personal computers, tablets, wearables and accessories, and sells a variety of related services. The Company's fiscal year is the 52 or 53-week period that ends on the last Saturday of September.
+
+Products
+iPhone: The Company's line of smartphones based on its iOS operating system. iPhone revenue for fiscal 2023 was $200.6 billion, representing 52% of total net sales.
+
+Mac: The Company's line of personal computers based on its macOS operating system. Mac revenue for fiscal 2023 was $29.4 billion.
+
+iPad: The Company's line of multi-purpose tablets based on its iPadOS operating system. iPad revenue for fiscal 2023 was $28.3 billion.
+
+Wearables, Home and Accessories: This category includes AirPods, Apple TV, Apple Watch, Beats products, HomePod, iPod touch and accessories. Revenue for fiscal 2023 was $39.8 billion.
+
+Services: The Company's services include advertising, AppleCare, cloud services, digital content and payment services. Services revenue for fiscal 2023 was $85.2 billion.
+
+Item 1A. Risk Factors
+
+The following risk factors may materially affect the Company's business, financial condition and results of operations:
+
+Global Economic Conditions
+The Company's operations and performance depend significantly on global and regional economic conditions. Adverse economic conditions can reduce demand for the Company's products and services.
+
+Competition
+The markets for the Company's products and services are highly competitive. The Company faces substantial competition in all areas of its business.
+
+Supply Chain
+The Company depends on third-party suppliers for components and manufacturing. Disruptions to the supply chain could materially adversely affect the Company's business.
+
+Technology Risks
+The Company's business depends on continued innovation and the development of new products and services. Failure to innovate could harm the Company's competitive position.
+
+Cybersecurity and Privacy
+The Company faces cybersecurity threats that could result in unauthorized access to sensitive information or disruption of operations.
+
+Item 2. Properties
+
+The Company's headquarters are located in Cupertino, California. The Company owns or leases facilities in various locations worldwide for research and development, manufacturing, warehousing, distribution and administrative purposes.
+
+Item 3. Legal Proceedings
+
+The Company is subject to various legal proceedings and claims that arise in the ordinary course of business.
+
+PART II
+
+Item 5. Market for Registrant's Common Equity and Related Stockholder Matters
+
+The Company's common stock is traded on The Nasdaq Global Select Market under the symbol "AAPL."
+
+Item 7. Management's Discussion and Analysis of Financial Condition and Results of Operations
+
+Fiscal Year 2023 Performance
+Total net sales for fiscal 2023 were $383.3 billion, a decrease of 3% compared to fiscal 2022. The decrease was primarily due to foreign exchange headwinds and challenging macroeconomic conditions.
+
+Net income for fiscal 2023 was $97.0 billion, compared to $99.8 billion in fiscal 2022. Diluted earnings per share were $6.16 in fiscal 2023, compared to $6.11 in fiscal 2022.
+
+Revenue by Product Category:
+- iPhone: $200.6 billion (52% of total revenue)
+- Services: $85.2 billion (22% of total revenue)
+- Wearables, Home and Accessories: $39.8 billion (10% of total revenue)
+- Mac: $29.4 billion (8% of total revenue)
+- iPad: $28.3 billion (7% of total revenue)
+
+Geographic Revenue:
+- Americas: $162.6 billion
+- Europe: $94.3 billion
+- Greater China: $72.6 billion
+- Japan: $24.9 billion
+- Rest of Asia Pacific: $28.9 billion
+
+Cash and Cash Equivalents
+As of September 30, 2023, the Company had cash and cash equivalents of $29.5 billion and marketable securities of $148.1 billion.
+
+Research and Development
+Research and development expenses were $29.9 billion in fiscal 2023, representing 7.8% of total net sales.
+
+Item 8. Financial Statements and Supplementary Data
+
+CONSOLIDATED STATEMENTS OF OPERATIONS
+(In millions, except number of shares which are reflected in thousands and per share amounts)
+
+                                    2023        2022        2021
+Net sales:
+Products                          $298,085    $316,199    $297,392
+Services                           85,200      78,129      68,425
+Total net sales                   383,285     394,328     365,817
+
+Cost of sales:
+Products                          189,282     201,471     192,266
+Services                           24,855      22,075      20,715
+Total cost of sales               214,137     223,546     212,981
+
+Gross margin                      169,148     170,782     152,836
+
+Operating expenses:
+Research and development           29,915      26,251      21,914
+Selling, general and administrative 24,932      25,094      21,973
+Total operating expenses           54,847      51,345      43,887
+
+Operating income                  114,301     119,437     108,949
+
+Other income/(expense), net         (565)       (334)       1,807
+
+Income before provision for income taxes  113,736  119,103   110,756
+
+Provision for income taxes         16,741      19,300      14,527
+
+Net income                        $96,995     $99,803     $94,680
+
+Earnings per share:
+Basic                              $6.18       $6.15       $5.67
+Diluted                            $6.16       $6.11       $5.61
+
+Shares used in computing earnings per share:
+Basic                           15,697,614  16,215,963  16,701,272
+Diluted                         15,744,231  16,325,819  16,864,919
+
+CONSOLIDATED BALANCE SHEETS
+(In millions, except number of shares which are reflected in thousands)
+
+                                    2023        2022
+ASSETS
+Current assets:
+Cash and cash equivalents         $29,498     $23,646
+Marketable securities             148,101     148,825
+Accounts receivable, net           29,508      28,184
+Inventories                         6,331       4,946
+Vendor non-trade receivables       31,477      32,748
+Other current assets               14,695      21,223
+Total current assets              259,610     259,572
+
+Non-current assets:
+Marketable securities              100,544     120,805
+Property, plant and equipment, net  43,715      42,117
+Other non-current assets            64,758      54,428
+Total non-current assets           209,017     217,350
+
+Total assets                      $468,627    $476,922
+
+LIABILITIES AND SHAREHOLDERS' EQUITY
+Current liabilities:
+Accounts payable                   $62,611     $64,115
+Other current liabilities           58,829      60,845
+Deferred revenue                     8,061       7,912
+Commercial paper                    5,985       9,982
+Term debt                          9,822       11,128
+Total current liabilities         145,308     153,982
+
+Non-current liabilities:
+Term debt                         106,550     98,959
+Other non-current liabilities      49,848      49,142
+Total non-current liabilities     156,398     148,101
+
+Total liabilities                 301,706     302,083
+
+Shareholders' equity:
+Common stock and additional paid-in capital  73,812  64,849
+Retained earnings                  115,566     122,150
+Accumulated other comprehensive income/(loss) (22,457) (12,160)
+Total shareholders' equity        166,921     174,839
+
+Total liabilities and shareholders' equity  $468,627  $476,922
+

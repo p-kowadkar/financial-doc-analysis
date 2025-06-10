@@ -1,0 +1,166 @@
+UNITED STATES
+SECURITIES AND EXCHANGE COMMISSION
+Washington, D.C. 20549
+
+FORM 10-K
+
+ANNUAL REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934
+
+For the fiscal year ended June 30, 2024
+
+Microsoft Corporation
+(Exact name of Registrant as specified in its charter)
+
+PART I
+
+Item 1. Business
+
+Company Overview
+Microsoft Corporation is a technology company whose mission is to empower every person and every organization on the planet to achieve more. We strive to create local opportunity, growth, and impact in every country around the world.
+
+Products and Services
+Our products include operating systems, cross-device productivity applications, server applications, business solution applications, desktop and server management tools, software development tools, and video games. We also design and sell devices, including PCs, tablets, gaming and entertainment consoles, other intelligent devices, and related accessories.
+
+Our segments are:
+- Productivity and Business Processes: Office, LinkedIn, and Dynamics
+- Intelligent Cloud: Server products and cloud services, including Azure and other cloud services
+- More Personal Computing: Windows, devices, gaming, and search
+
+Item 1A. Risk Factors
+
+The following risk factors may materially affect our business, financial condition and results of operations:
+
+Intense Competition
+Our businesses face intense competition. We compete with companies that develop, license, or sell competing software, services, and devices.
+
+Evolving Technology Landscape
+The computing industry is continuously evolving. Our success depends on our ability to anticipate technology trends and develop innovative products and services.
+
+Cybersecurity and Privacy Risks
+Cyberattacks and security vulnerabilities could lead to reduced revenue, increased costs, liability claims, or harm to our reputation and competitive position.
+
+Regulatory Risks
+Our business is subject to complex and evolving U.S. and foreign laws and regulations regarding privacy, data protection, content, competition, and other matters.
+
+Global Operations
+Our business depends on our ability to attract and retain talented employees. We operate globally and our operations in certain parts of the world are subject to risks of doing business internationally.
+
+Item 2. Properties
+
+Our corporate headquarters are located in Redmond, Washington. We have significant operations in various locations worldwide for research and development, manufacturing, warehousing, distribution, and administrative purposes.
+
+Item 3. Legal Proceedings
+
+We are subject to various legal proceedings and claims that arise in the ordinary course of business.
+
+PART II
+
+Item 5. Market for Registrant's Common Equity and Related Stockholder Matters
+
+Our common stock is traded on the NASDAQ Global Select Market under the symbol "MSFT."
+
+Item 7. Management's Discussion and Analysis of Financial Condition and Results of Operations
+
+Fiscal Year 2024 Performance
+Total revenue for fiscal 2024 was $245.1 billion, an increase of 15% compared to fiscal 2023. The increase was primarily driven by growth in our cloud business, particularly Azure and other cloud services.
+
+Net income for fiscal 2024 was $87.3 billion, compared to $72.4 billion in fiscal 2023. Diluted earnings per share were $11.72 in fiscal 2024, compared to $9.68 in fiscal 2023.
+
+Revenue by Segment:
+- Productivity and Business Processes: $75.3 billion (31% of total revenue)
+- Intelligent Cloud: $106.4 billion (43% of total revenue)
+- More Personal Computing: $63.4 billion (26% of total revenue)
+
+Cash and Cash Equivalents
+As of June 30, 2024, we had cash and cash equivalents of $34.7 billion and short-term investments of $71.2 billion.
+
+Research and Development
+Research and development expenses were $28.7 billion in fiscal 2024, representing 11.7% of total revenue.
+
+Item 8. Financial Statements and Supplementary Data
+
+CONSOLIDATED STATEMENTS OF INCOME
+(In millions, except per share amounts)
+
+                                    2024        2023        2022
+Revenue:
+  Product                         $79,223     $72,732     $72,557
+  Service and other               165,865     140,281     126,127
+    Total revenue                 245,088     213,013     198,684
+
+Cost of revenue:
+  Product                          22,143      20,517      21,886
+  Service and other                56,421      49,483      43,586
+    Total cost of revenue          78,564      70,000      65,472
+
+Gross margin                      166,524     143,013     133,212
+
+Research and development           28,742      27,195      24,512
+Sales and marketing                22,383      21,825      21,365
+General and administrative         7,563       6,556       5,900
+  Total operating expenses         58,688      55,576      51,777
+
+Operating income                  107,836      87,437      81,435
+
+Other income, net                   1,453         996       (146)
+
+Income before income taxes        109,289      88,433      81,289
+Income tax expense                 21,983      16,048      10,978
+
+Net income                       $87,306     $72,385     $70,311
+
+Earnings per share:
+  Basic                           $11.77       $9.73       $9.39
+  Diluted                         $11.72       $9.68       $9.30
+
+Weighted average shares outstanding:
+  Basic                            7,418        7,439       7,496
+  Diluted                          7,448        7,476       7,558
+
+CONSOLIDATED BALANCE SHEETS
+(In millions)
+
+                                    2024        2023
+ASSETS
+Current assets:
+  Cash and cash equivalents       $34,721     $34,704
+  Short-term investments           71,193      81,451
+  Accounts receivable, net         44,261      44,261
+  Inventories                       3,451       3,017
+  Other current assets             18,283      16,924
+    Total current assets          171,909     180,357
+
+Property and equipment, net        87,314      72,086
+Operating lease right-of-use assets 13,148     13,148
+Equity investments                 12,692      12,692
+Goodwill                          67,903      67,903
+Intangible assets, net             10,423      10,423
+Other long-term assets             26,974      26,974
+    Total assets                 $390,363    $383,583
+
+LIABILITIES AND STOCKHOLDERS' EQUITY
+Current liabilities:
+  Accounts payable                $17,525     $17,525
+  Current portion of long-term debt  2,749      2,749
+  Accrued compensation             10,284      10,284
+  Short-term income taxes           5,187       5,187
+  Short-term unearned revenue      45,538      45,538
+  Other current liabilities        13,067      13,067
+    Total current liabilities      94,350      94,350
+
+Long-term debt                     44,275      44,275
+Long-term income taxes              9,713       9,713
+Long-term unearned revenue          3,181       3,181
+Deferred income taxes               1,542       1,542
+Operating lease liabilities        11,489      11,489
+Other long-term liabilities        17,548      17,548
+    Total liabilities             182,098     182,098
+
+Stockholders' equity:
+  Common stock and paid-in capital  93,718      93,718
+  Retained earnings               114,940     114,940
+  Accumulated other comprehensive loss (393)    (7,173)
+    Total stockholders' equity    208,265     201,485
+
+Total liabilities and stockholders' equity $390,363 $383,583
+
