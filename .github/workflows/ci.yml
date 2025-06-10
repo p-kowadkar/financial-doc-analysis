@@ -36,15 +36,15 @@ jobs:
       run: |
         cd tests/unit
         # Compile and run document parser test
-        g++ -std=c++17 -I.. -I../.. test_document_parser.cpp -o test_document_parser
+        g++ -std=c++17 test_document_parser.cpp -o test_document_parser
         ./test_document_parser
         
         # Compile and run TFIDF embedding test
-        g++ -std=c++17 -I.. -I../.. test_tfidf_embedding.cpp -o test_tfidf_embedding
+        g++ -std=c++17 test_tfidf_embedding.cpp -o test_tfidf_embedding
         ./test_tfidf_embedding
         
         # Compile and run LLM client test (mock implementation)
-        g++ -std=c++17 -I.. -I../.. test_llm_client.cpp -o test_llm_client
+        g++ -std=c++17 test_llm_client.cpp -o test_llm_client
         ./test_llm_client
     
     - name: Test core executables
