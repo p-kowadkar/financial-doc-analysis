@@ -12,7 +12,7 @@ fi
 
 echo "Compiling components..."
 
-# Compile all components
+# Compile core components (no external dependencies)
 echo "- Compiling html_text_extractor.cpp..."
 g++ -std=c++17 -O2 -o html_text_extractor html_text_extractor.cpp
 if [ $? -ne 0 ]; then
@@ -62,23 +62,43 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Compile SEC data acquisition tool (if libcurl is available)
-echo "- Compiling sec_data_acquisition.cpp..."
+# Try to compile components that require libcurl (optional)
+echo "- Attempting to compile libcurl-dependent components..."
+SEC_COMPILED=false
+LLM_COMPILED=false
+
 if pkg-config --exists libcurl 2>/dev/null; then
-    echo "  Found libcurl, compiling with network support..."
-    g++ -std=c++17 -O2 $(pkg-config --cflags libcurl) $(pkg-config --libs libcurl) -o sec_data_acquisition sec_data_acquisition.cpp sec_edgar_client.cpp
-    if [ $? -ne 0 ]; then
-        echo "Warning: Failed to compile sec_data_acquisition.cpp with libcurl"
+    echo "  Found libcurl via pkg-config"
+    CURL_CFLAGS=$(pkg-config --cflags libcurl)
+    CURL_LIBS=$(pkg-config --libs libcurl)
+    
+    echo "  - Compiling sec_data_acquisition.cpp..."
+    g++ -std=c++17 -O2 $CURL_CFLAGS -o sec_data_acquisition sec_data_acquisition.cpp sec_edgar_client.cpp $CURL_LIBS 2>/dev/null
+    if [ $? -eq 0 ]; then
+        echo "    ✓ sec_data_acquisition compiled successfully"
+        SEC_COMPILED=true
+    else
+        echo "    ✗ sec_data_acquisition compilation failed"
+    fi
+    
+    echo "  - Testing llm_client.cpp compilation..."
+    g++ -std=c++17 -O2 $CURL_CFLAGS -c llm_client.cpp $CURL_LIBS 2>/dev/null
+    if [ $? -eq 0 ]; then
+        echo "    ✓ llm_client.cpp compiles successfully"
+        rm -f llm_client.o  # Clean up object file
+        LLM_COMPILED=true
+    else
+        echo "    ✗ llm_client.cpp compilation failed"
     fi
 else
-    echo "  libcurl not found, skipping sec_data_acquisition compilation"
-    echo "  To install libcurl: sudo apt install libcurl4-openssl-dev (Ubuntu/Debian)"
+    echo "  ✗ libcurl not found via pkg-config"
+    echo "    To install: sudo apt install libcurl4-openssl-dev pkg-config"
 fi
 
 echo
 echo "Build completed successfully!"
 echo
-echo "Available executables:"
+echo "Core executables (always available):"
 echo "- html_text_extractor"
 echo "- document_parser"
 echo "- tfidf_embedding"
@@ -86,13 +106,24 @@ echo "- query_engine"
 echo "- rag_engine"
 echo "- financial_analyzer"
 echo "- main (unified CLI interface)"
-if [ -f "sec_data_acquisition" ]; then
-    echo "- sec_data_acquisition (SEC EDGAR data downloader)"
+
+echo
+echo "Optional components (require libcurl):"
+if [ "$SEC_COMPILED" = true ]; then
+    echo "✓ sec_data_acquisition - Available"
+else
+    echo "✗ sec_data_acquisition - Not available"
 fi
+
+if [ "$LLM_COMPILED" = true ]; then
+    echo "✓ llm_client - Available for compilation"
+else
+    echo "✗ llm_client - Not available"
+fi
+
 echo
 echo "To get started, run: ./main help"
-if [ -f "sec_data_acquisition" ]; then
+if [ "$SEC_COMPILED" = true ]; then
     echo "For SEC data: ./sec_data_acquisition help"
 fi
 echo
-
