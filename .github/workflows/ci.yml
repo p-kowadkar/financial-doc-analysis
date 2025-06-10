@@ -1,0 +1,108 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential g++ libcurl4-openssl-dev
+    
+    - name: Build project
+      run: |
+        cd src
+        chmod +x build.sh
+        ./build.sh
+    
+    - name: Run unit tests
+      run: |
+        cd tests/unit
+        g++ -std=c++17 -I"../../src" test_document_parser.cpp -o test_document_parser
+        ./test_document_parser
+        
+        g++ -std=c++17 -I"../../src" test_tfidf_embedding.cpp -o test_tfidf_embedding
+        ./test_tfidf_embedding
+        
+        g++ -std=c++17 -I"../../src" test_llm_client.cpp -o test_llm_client
+        ./test_llm_client
+    
+    - name: Test executables
+      run: |
+        cd src
+        echo "Testing document parser..."
+        echo "Sample text content" > test_input.txt
+        ./document_parser test_input.txt test_output.json
+        
+        echo "Testing HTML extractor..."
+        echo "<html><body><p>Test</p></body></html>" > test.html
+        ./html_text_extractor test.html test_clean.txt
+        
+        echo "Testing TF-IDF embedding..."
+        ./tfidf_embedding help
+
+  build-windows:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup MinGW
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: MINGW64
+        install: mingw-w64-x86_64-gcc mingw-w64-x86_64-curl
+    
+    - name: Build project (Windows)
+      shell: msys2 {0}
+      run: |
+        cd src
+        ./build.sh
+    
+    - name: Test Windows build
+      shell: msys2 {0}
+      run: |
+        cd src
+        echo "Sample text" > test.txt
+        ./document_parser.exe test.txt output.json
+
+  deploy:
+    needs: [test, build-windows]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Build release
+      run: |
+        cd src
+        chmod +x build.sh
+        ./build.sh
+    
+    - name: Create Release
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ github.run_number }}
+        release_name: Release v${{ github.run_number }}
+        body: |
+          Automated release from main branch
+          
+          ## Changes
+          - Latest stable build
+          - All tests passing
+          
+        draft: false
+        prerelease: false
