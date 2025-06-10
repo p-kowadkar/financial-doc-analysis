@@ -17,6 +17,11 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y build-essential g++ libcurl4-openssl-dev
+
+    - name: Create directories
+      run: |
+        mkdir -p output
+        mkdir -p data/sec_filings
     
     - name: Build project
       run: |
@@ -27,13 +32,16 @@ jobs:
     - name: Run unit tests
       run: |
         cd tests/unit
-        g++ -std=c++17 -I"../../src" test_document_parser.cpp -o test_document_parser
+        # Compile and run document parser test
+        g++ -std=c++17 test_document_parser.cpp -o test_document_parser
         ./test_document_parser
         
-        g++ -std=c++17 -I"../../src" test_tfidf_embedding.cpp -o test_tfidf_embedding
+        # Compile and run TFIDF embedding test
+        g++ -std=c++17 test_tfidf_embedding.cpp -o test_tfidf_embedding
         ./test_tfidf_embedding
         
-        g++ -std=c++17 -I"../../src" test_llm_client.cpp -o test_llm_client
+        # Compile and run LLM client test
+        g++ -std=c++17 test_llm_client.cpp -o test_llm_client
         ./test_llm_client
     
     - name: Test executables
@@ -41,14 +49,14 @@ jobs:
         cd src
         echo "Testing document parser..."
         echo "Sample text content" > test_input.txt
-        ./document_parser test_input.txt test_output.json
+        ./document_parser test_input.txt ../output/test_output.json
         
         echo "Testing HTML extractor..."
         echo "<html><body><p>Test</p></body></html>" > test.html
-        ./html_text_extractor test.html test_clean.txt
+        ./html_text_extractor test.html ../output/test_clean.txt
         
         echo "Testing TF-IDF embedding..."
-        ./tfidf_embedding help
+        ./tfidf_embedding --help
 
   build-windows:
     runs-on: windows-latest
@@ -60,20 +68,42 @@ jobs:
       uses: msys2/setup-msys2@v2
       with:
         msystem: MINGW64
-        install: mingw-w64-x86_64-gcc mingw-w64-x86_64-curl
+        install: >-
+          mingw-w64-x86_64-gcc
+          mingw-w64-x86_64-curl
+          mingw-w64-x86_64-cmake
+          make
+    
+    - name: Create directories
+      shell: msys2 {0}
+      run: |
+        mkdir -p output
+        mkdir -p data/sec_filings
     
     - name: Build project (Windows)
       shell: msys2 {0}
       run: |
         cd src
-        ./build.sh
+        g++ -std=c++17 -O2 -o document_parser.exe document_parser.cpp
+        g++ -std=c++17 -O2 -o html_text_extractor.exe html_text_extractor.cpp
+        g++ -std=c++17 -O2 -o tfidf_embedding.exe tfidf_embedding.cpp
+        g++ -std=c++17 -O2 -o query_engine.exe query_engine.cpp
+        g++ -std=c++17 -O2 -o rag_engine.exe rag_engine.cpp
+        g++ -std=c++17 -O2 -o financial_analyzer.exe financial_analyzer.cpp
+        g++ -std=c++17 -O2 -o main.exe main.cpp
+        g++ -std=c++17 -O2 -o sec_data_acquisition.exe sec_data_acquisition.cpp sec_edgar_client.cpp
     
     - name: Test Windows build
       shell: msys2 {0}
       run: |
         cd src
         echo "Sample text" > test.txt
-        ./document_parser.exe test.txt output.json
+        ./document_parser.exe test.txt ../output/test_output.json
+        
+        echo "<html><body><p>Test content</p></body></html>" > test.html
+        ./html_text_extractor.exe test.html ../output/test_clean.txt
+        
+        ./tfidf_embedding.exe --help
 
   deploy:
     needs: [test, build-windows]
@@ -82,6 +112,11 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential g++ libcurl4-openssl-dev
     
     - name: Build release
       run: |
@@ -103,6 +138,14 @@ jobs:
           ## Changes
           - Latest stable build
           - All tests passing
+          - Windows and Linux builds verified
           
         draft: false
         prerelease: false
+    
+    - name: Upload Linux Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: linux-binaries
+        path: src/*
+        if-no-files-found: error
