@@ -1,6 +1,5 @@
 @echo off
 REM Windows Build Script for C++ Financial Document Analysis System
-REM No external dependencies required - uses only standard C++ libraries
 
 echo Building C++ Financial Document Analysis System for Windows...
 echo.
@@ -14,6 +13,19 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
+REM Check for curl
+where curl >nul 2>&1
+if %errorlevel% neq 0 (
+    echo Error: curl not found. Please install MSYS2 and run:
+    echo pacman -S mingw-w64-x86_64-curl
+    pause
+    exit /b 1
+)
+
+REM Set include and library paths for curl
+set CURL_INCLUDE=C:\msys64\mingw64\include
+set CURL_LIB=C:\msys64\mingw64\lib
+
 echo Compiling components...
 
 REM Compile HTML text extractor
@@ -21,6 +33,15 @@ echo - Compiling html_text_extractor.cpp...
 g++ -std=c++17 -O2 -o html_text_extractor.exe html_text_extractor.cpp
 if %errorlevel% neq 0 (
     echo Error compiling html_text_extractor.cpp
+    pause
+    exit /b 1
+)
+
+REM Compile SEC data acquisition components
+echo - Compiling SEC data acquisition components...
+g++ -std=c++17 -O2 -I"%CURL_INCLUDE%" -o sec_data_acquisition.exe sec_data_acquisition.cpp sec_edgar_client.cpp -L"%CURL_LIB%" -lcurl
+if %errorlevel% neq 0 (
+    echo Error compiling SEC data acquisition components
     pause
     exit /b 1
 )
