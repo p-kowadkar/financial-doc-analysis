@@ -4,16 +4,34 @@ import os
 import json
 import tempfile
 from datetime import datetime
+from web_scraper import search_and_scrape
 
 app = Flask(__name__)
 
 # Set the working directory to the src folder
-SRC_DIR = '/home/ubuntu/financial-doc-analysis-windows/src'
-OUTPUT_DIR = '/home/ubuntu/financial-doc-analysis-windows/output'
+# Determine paths dynamically
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SRC_DIR = os.path.join(BASE_DIR, 'src')
+OUTPUT_DIR = os.path.join(BASE_DIR, 'output')
+
+# Ensure directories exist
+if not os.path.exists(SRC_DIR):
+    print(f"Warning: Source directory not found at {SRC_DIR}")
+if not os.path.exists(OUTPUT_DIR):
+    os.makedirs(OUTPUT_DIR)
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
+def validate_input(text):
+    """Basic validation to prevent shell injection characters"""
+    # Block characters that are dangerous in shell commands
+    dangerous_chars = [';', '&', '|', '`', '$', '(', ')', '<', '>', '\\']
+    for char in dangerous_chars:
+        if char in text:
+            return False
+    return True
 
 @app.route('/query', methods=['POST'])
 def query():
@@ -25,18 +43,22 @@ def query():
         
         if not query_text:
             return jsonify({'error': 'Query text is required'}), 400
+            
+        if not validate_input(query_text):
+            return jsonify({'error': 'Query contains invalid characters'}), 400
         
         # Generate unique output filename
         timestamp = int(datetime.now().timestamp())
         
         if use_summary:
             output_file = f'{OUTPUT_DIR}/web_rag_result_{timestamp}.md'
-            cmd = [f'{SRC_DIR}/rag_engine', f'{OUTPUT_DIR}/financial_docs_index.json', 
+            cmd = [f'{SRC_DIR}/rag_engine.exe', f'{OUTPUT_DIR}/financial_docs_index.json', 
                    query_text, output_file, str(top_k)]
         else:
             output_file = f'{OUTPUT_DIR}/web_query_result_{timestamp}.json'
-            cmd = [f'{SRC_DIR}/query_engine', f'{OUTPUT_DIR}/financial_docs_index.json', 
+            cmd = [f'{SRC_DIR}/query_engine.exe', f'{OUTPUT_DIR}/financial_docs_index.json', 
                    query_text, output_file, str(top_k), '--json']
+
         
         # Execute the query
         result = subprocess.run(cmd, capture_output=True, text=True, cwd=SRC_DIR)
@@ -88,7 +110,7 @@ def analyze():
         json_output = f'{OUTPUT_DIR}/web_analysis_{timestamp}.json'
         md_output = f'{OUTPUT_DIR}/web_analysis_{timestamp}.md'
         
-        cmd = [f'{SRC_DIR}/financial_analyzer', f'{OUTPUT_DIR}/financial_docs_index.json', 
+        cmd = [f'{SRC_DIR}/financial_analyzer.exe', f'{OUTPUT_DIR}/financial_docs_index.json', 
                json_output, md_output]
         
         result = subprocess.run(cmd, capture_output=True, text=True, cwd=SRC_DIR)
@@ -139,6 +161,31 @@ def status():
         
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@app.route('/scrape', methods=['POST'])
+def scrape():
+    """Real-time web scraping endpoint"""
+    try:
+        data = request.json
+        query_text = data.get('query', '')
+        max_results = data.get('max_results', 3)
+        
+        if not query_text:
+            return jsonify({'error': 'Query text is required'}), 400
+        
+        # Perform web search and scraping
+        results = search_and_scrape(query_text, max_results=max_results)
+        
+        return jsonify({
+            'success': True,
+            'type': 'web_results',
+            'query': query_text,
+            'results': results
+        })
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

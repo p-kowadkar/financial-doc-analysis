@@ -102,6 +102,13 @@ private:
         return buffer.str();
     }
 
+// Helper to validate input for shell safety
+    bool isValidInput(const std::string& input) {
+        // Blacklist of dangerous characters for shell commands
+        const std::string dangerous = "&|;`$()<>\\";
+        return input.find_first_of(dangerous) == std::string::npos;
+    }
+
 public:
     FinancialDocumentAnalysisSystem() {
         // Initialize LLM client lazily when needed
@@ -182,6 +189,11 @@ public:
     }
 
     int executeQuery(const std::string& query, int topK, bool useSummary, bool useJSON) {
+        if (!isValidInput(query)) {
+            logger.log("ERROR", "Security violation: Invalid characters in query");
+            return 1;
+        }
+
         logger.log("INFO", "Executing query: \"" + query + "\"");
         
         std::string outputFile;
@@ -240,6 +252,19 @@ public:
     }
 
     int executeLLM(const std::string& prompt, const std::map<std::string, std::string>& options) {
+        if (!isValidInput(prompt)) {
+            logger.log("ERROR", "Security violation: Invalid characters in prompt");
+            return 1;
+        }
+
+        // Validate options too
+        for (const auto& pair : options) {
+            if (!isValidInput(pair.second)) {
+                logger.log("ERROR", "Security violation: Invalid characters in options");
+                return 1;
+            }
+        }
+
         // Initialize LLM client if not already initialized
         if (!llmClient && !initializeLLMClient()) {
             return 1;
